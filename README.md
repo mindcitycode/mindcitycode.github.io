@@ -1,30 +1,30 @@
 # mindcitycode.github.io
 
-herringbone
+## herringbone
 
 Herringbone Tiles
 
 [herringbone](./pages/herringbone/dist/)
 
-mindcity
+## mindcity
 
 a game of mind in a city
 
 [mindcity](./pages/mindcity/dist/)
 
-sandsim
+## sandsim
 
 a standard sand sim
 
 [sandsim](./pages/sandsim/dist/)
 
-siouver
+## siouver
 
 
 
 [siouver](./pages/siouver/dist/)
 
-surfaces
+## surfaces
 
 Surfaces
 
