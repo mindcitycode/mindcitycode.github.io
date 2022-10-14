@@ -26,6 +26,12 @@ a standard sand sim
 
 ## surfaces
 
-Surfaces
+Build and display meshes defined by signed distance functions
 
 [surfaces](./pages/surfaces/dist/)
+
+## webaudio-editor
+
+A simple WebAudio node editor
+
+[webaudio-editor](./pages/webaudio-editor/dist/)
