@@ -22,11 +22,12 @@ const markdown = [
 ]
 const reposBlackList = [
     'mindcitycode/mindcitycode.github.io',
-    'mindictycode/siouver',
+    'mindcitycode/siouver',
+]
+const reposNoWebBlackList = [
     'mindcitycode/yaytdlgui',
     'mindcitycode/sutom-solve-cli',
 ]
-
 const go = async () => {
 
     await rm(BUILDS_PATH, { recursive: true, force: true })
@@ -61,21 +62,25 @@ const go = async () => {
         shell.cd(repo.name)
         shell.exec('git pull')
 
-        shell.exec('npm install')
-        shell.exec('npm run build')
-
         const packageDotJson = JSON.parse(readFileSync(path.join(BUILDS_PATH, repo.name, 'package.json'), 'utf8'))
         markdown.push(`## ${repo.name}`)
         markdown.push(packageDotJson.description)
-        markdown.push(`[${repo.name}](./pages/${repo.name}/dist/)`)
-        try {
-            await mkdir(path.join(PAGES_PATH, repo.name), { recursive: true })
-            await rename(
-                path.join(BUILDS_PATH, repo.name, 'dist'),
-                path.join(PAGES_PATH, repo.name, 'dist')
-            )
-        } catch (e) {
-            console.error(e)
+
+        if (!reposNoWebBlackList.includes(repo.full_name)) {
+            markdown.push(`[${repo.name}](./pages/${repo.name}/dist/)`)
+
+            shell.exec('npm install')
+            shell.exec('npm run build')
+
+            try {
+                await mkdir(path.join(PAGES_PATH, repo.name), { recursive: true })
+                await rename(
+                    path.join(BUILDS_PATH, repo.name, 'dist'),
+                    path.join(PAGES_PATH, repo.name, 'dist')
+                )
+            } catch (e) {
+                console.error(e)
+            }
         }
     }
 
