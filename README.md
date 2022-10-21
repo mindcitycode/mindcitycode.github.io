@@ -18,12 +18,6 @@ a standard sand sim
 
 [sandsim](./pages/sandsim/dist/)
 
-## siouver
-
-
-
-[siouver](./pages/siouver/dist/)
-
 ## surfaces
 
 Build and display meshes defined by signed distance functions
@@ -36,8 +30,16 @@ a web sutom helper gui
 
 [sutom-helper](./pages/sutom-helper/dist/)
 
+## sutom-solve-cli
+
+a command line solver helper for french SUTOM game
+
 ## webaudio-editor
 
 A simple WebAudio node editor
 
 [webaudio-editor](./pages/webaudio-editor/dist/)
+
+## yaytdlgui
+
+yet another ytdl gui
