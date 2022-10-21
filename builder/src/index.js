@@ -17,6 +17,9 @@ const PAGES_PATH = path.resolve(path.join(KEEP_PATH, 'pages'))
 const markdown = [
     '# mindcitycode.github.io'
 ]
+const reposBlackList = [
+    'mindcitycode/mindcitycode.github.io'
+]
 
 const go = async () => {
 
@@ -36,11 +39,10 @@ const go = async () => {
     } else {
         repos = JSON.parse(readFileSync("./repos.json", 'utf8'))
     }
-    
+
     for (let i = 0; i < repos.length; i++) {
         const repo = repos[i]
-
-        if (repo.full_name === 'mindcitycode/mindcitycode.github.io')
+        if (reposBlackList.includes(repo.full_name))
             continue;
 
         console.log(`repo : ${repo.full_name}`)
