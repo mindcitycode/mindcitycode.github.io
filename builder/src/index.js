@@ -1,3 +1,6 @@
+// usage :
+//
+// cd builder && node src/index.js
 
 import fetch from 'node-fetch'
 import { readFileSync, writeFileSync } from 'fs'
@@ -18,7 +21,10 @@ const markdown = [
     '# mindcitycode.github.io'
 ]
 const reposBlackList = [
-    'mindcitycode/mindcitycode.github.io'
+    'mindcitycode/mindcitycode.github.io',
+    'mindictycode/siouver',
+    'mindcitycode/yaytdlgui',
+    'mindcitycode/sutom-solve-cli',
 ]
 
 const go = async () => {

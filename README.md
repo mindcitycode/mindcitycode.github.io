@@ -30,6 +30,12 @@ Build and display meshes defined by signed distance functions
 
 [surfaces](./pages/surfaces/dist/)
 
+## sutom-helper
+
+a web sutom helper gui
+
+[sutom-helper](./pages/sutom-helper/dist/)
+
 ## webaudio-editor
 
 A simple WebAudio node editor
