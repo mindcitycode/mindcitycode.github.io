@@ -18,6 +18,12 @@ a standard sand sim
 
 [sandsim](./pages/sandsim/dist/)
 
+## soumde
+
+a zero-dependency browser midi player
+
+[soumde](./pages/soumde/dist/)
+
 ## surfaces
 
 Build and display meshes defined by signed distance functions
