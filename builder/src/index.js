@@ -48,7 +48,7 @@ const go = async () => {
         repos = JSON.parse(readFileSync("./repos.json", 'utf8'))
     }
 
-    repos.length = 1
+//    repos.length = 1
 
 
     for (let i = 0; i < repos.length; i++) {
