@@ -119,10 +119,14 @@ const markdownText = markdown.join("\n\n")
 
 
 // console.log(markdownText)
+async function testWrite() {
+    const testPath = './test'
+    await fs.mkdir(testPath, { recursive: true })
+    const testReadmePath = path.join(testPath, `${packageJson.name}.md`)
+    await fs.writeFile(testReadmePath, markdownText, 'utf8')
+    console.log('wrote', testReadmePath)
+}
 
-const testPath = './test'
-await fs.mkdir(testPath, { recursive: true })
-const testReadmePath = path.join(testPath, `${packageJson.name}.md`)
-await fs.writeFile(testReadmePath, markdownText, 'utf8')
+await fs.writeFile(readmePath, markdownText, 'utf8')
+console.log('wrote', readmePath)
 
-console.log('wrote', testReadmePath)
