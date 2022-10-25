@@ -2,4 +2,5 @@ builder/node_modules/
 builder/keep/
 builder/node_modules/
 builder/builds/
+builder/test/
 builder/src/test/
