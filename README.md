@@ -4,7 +4,7 @@
 
 Herringbone Tiles
 
-![a screenshot](https://github.com/mindcitycode/herringbone/blob/main/screenshot.png?raw=true|width=100px)
+![a screenshot|width=100px](https://github.com/mindcitycode/herringbone/blob/main/screenshot.png?raw=true)
 
 ## instance
 
