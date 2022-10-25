@@ -77,7 +77,13 @@ if (packageJson.deploymentsExample) {
     const url = packageJson.deploymentsExample
     markdown.push(
         `## deployed instance`,
-        `an instance might be working here : [${url}](${url})`
+        `an instance might be running here : [${url}](${url})`
+    )
+} else {
+    const url = `https://mindcitycode.github.io/pages/${packageJson.name}/dist`
+    markdown.push(
+        `## instance`,
+        `an instance might be running here : [${url}](${url})`
     )
 }
 
