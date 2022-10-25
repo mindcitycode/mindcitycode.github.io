@@ -4,7 +4,13 @@
 
 Herringbone Tiles
 
+<<<<<<< HEAD
 <img alt="a screenshot" src="https://github.com/mindcitycode/herringbone/blob/main/screenshot.png?raw=true" width="500px">
+=======
+<img alt="a screenshot" src="https://github.com/mindcitycode/herringbone/blob/main/screenshot.png?raw=true" width="500px" >
+
+## instance
+>>>>>>> 0689842538cd502eb3599408ee39b63e4128f079
 
 an instance might be running here : [https://mindcitycode.github.io/pages/herringbone/dist](https://mindcitycode.github.io/pages/herringbone/dist)
 
