@@ -3,12 +3,13 @@
 // cd builder && node src/index.js
 
 import fetch from 'node-fetch'
-import { readFileSync, writeFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { mkdir, rename, rm } from 'fs/promises'
 import path from 'path'
 import shell from 'shelljs'
+import { mdAddInstance } from './mdInstance.js'
 
-const USE_GITHUB_REPO_LIST = true
+const USE_GITHUB_REPO_LIST = false
 
 const url = "https://api.github.com/users/mindcitycode/repos"
 const settings = {}
@@ -47,6 +48,9 @@ const go = async () => {
         repos = JSON.parse(readFileSync("./repos.json", 'utf8'))
     }
 
+    repos.length = 1
+
+
     for (let i = 0; i < repos.length; i++) {
         const repo = repos[i]
         if (reposBlackList.includes(repo.full_name))
@@ -63,16 +67,25 @@ const go = async () => {
         shell.exec('git pull')
 
         const packageDotJson = JSON.parse(readFileSync(path.join(BUILDS_PATH, repo.name, 'package.json'), 'utf8'))
-        markdown.push(`## ${repo.name}`)
+        markdown.push(`# ${repo.name}`)
         markdown.push(packageDotJson.description)
 
-        const deploymentsExample = packageDotJson.deploymentsExample
-        if (deploymentsExample){
-            markdown.push(`deployed example instance [${deploymentsExample}](${deploymentsExample})`)
+        const hasScreenshot = existsSync(path.join(BUILDS_PATH, repo.name, 'screenshot.png'))
+        if (hasScreenshot) {
+            const mdLink = (alt, username, reponame, branch, imagename) => `![${alt}](https://github.com/${username}/${reponame}/blob/${branch}/${imagename}?raw=true)`
+            markdown.push(mdLink('a screenshot', repo.owner.login, repo.name, repo.default_branch, 'screenshot.png'))
         }
 
+        mdAddInstance(packageDotJson, markdown)
+        /*
+                const deploymentsExample = packageDotJson.deploymentsExample
+                if (deploymentsExample){
+                    markdown.push(`deployed example instance [${deploymentsExample}](${deploymentsExample})`)
+                }
+        */
         if (!reposNoWebBlackList.includes(repo.full_name)) {
-            markdown.push(`[${repo.name}](./pages/${repo.name}/dist/)`)
+
+            //  markdown.push(`[${repo.name}](./pages/${repo.name}/dist/)`)
 
             shell.exec('npm install')
             shell.exec('npm run build')
