@@ -9,7 +9,7 @@ import path from 'path'
 import shell from 'shelljs'
 import { mdAddInstance } from './mdInstance.js'
 
-const USE_GITHUB_REPO_LIST = false
+const USE_GITHUB_REPO_LIST = true
 
 const url = "https://api.github.com/users/mindcitycode/repos"
 const settings = {}
