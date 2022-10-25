@@ -22,11 +22,11 @@ const markdown = [
 ]
 const reposBlackList = [
     'mindcitycode/mindcitycode.github.io',
-    'mindcitycode/siouver',
 ]
 const reposNoWebBlackList = [
     'mindcitycode/yaytdlgui',
     'mindcitycode/sutom-solve-cli',
+    'mindcitycode/siouver',
 ]
 const go = async () => {
 
@@ -65,6 +65,11 @@ const go = async () => {
         const packageDotJson = JSON.parse(readFileSync(path.join(BUILDS_PATH, repo.name, 'package.json'), 'utf8'))
         markdown.push(`## ${repo.name}`)
         markdown.push(packageDotJson.description)
+
+        const deploymentsExample = packageDotJson.deploymentsExample
+        if (deploymentsExample){
+            markdown.push(`deployed example instance [${deploymentsExample}](${deploymentsExample})`)
+        }
 
         if (!reposNoWebBlackList.includes(repo.full_name)) {
             markdown.push(`[${repo.name}](./pages/${repo.name}/dist/)`)
