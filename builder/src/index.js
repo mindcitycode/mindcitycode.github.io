@@ -9,7 +9,7 @@ import path from 'path'
 import shell from 'shelljs'
 import { mdAddInstance } from './mdInstance.js'
 
-const USE_GITHUB_REPO_LIST = true
+const USE_GITHUB_REPO_LIST = false
 
 const url = "https://api.github.com/users/mindcitycode/repos"
 const settings = {}
@@ -31,10 +31,12 @@ const reposNoWebBlackList = [
 ]
 const go = async () => {
 
+    console.log('remove dirs')
     await rm(BUILDS_PATH, { recursive: true, force: true })
     await rm(KEEP_PATH, { recursive: true, force: true })
     await rm(PAGES_PATH, { recursive: true, force: true })
 
+    console.log('create dirs')
     await mkdir(BUILDS_PATH, { recursive: true })
     await mkdir(KEEP_PATH, { recursive: true })
     await mkdir(PAGES_PATH, { recursive: true })
@@ -48,7 +50,7 @@ const go = async () => {
         repos = JSON.parse(readFileSync("./repos.json", 'utf8'))
     }
 
-//    repos.length = 1
+    //    repos.length = 1
 
 
     for (let i = 0; i < repos.length; i++) {
@@ -67,22 +69,28 @@ const go = async () => {
         shell.exec('git pull')
 
         const packageDotJson = JSON.parse(readFileSync(path.join(BUILDS_PATH, repo.name, 'package.json'), 'utf8'))
-        markdown.push(`# ${repo.name}`)
+        markdown.push(`## ${repo.name}`)
         markdown.push(packageDotJson.description)
 
         const hasScreenshot = existsSync(path.join(BUILDS_PATH, repo.name, 'screenshot.png'))
         if (hasScreenshot) {
-            const mdLink = (alt, username, reponame, branch, imagename) => `![${alt}](https://github.com/${username}/${reponame}/blob/${branch}/${imagename}?raw=true)`
-            markdown.push(mdLink('a screenshot', repo.owner.login, repo.name, repo.default_branch, 'screenshot.png'))
+            // const mdImageLink = (alt, username, reponame, branch, imagename) => `![${alt}](https://github.com/${username}/${reponame}/blob/${branch}/${imagename}?raw=true)`
+            // markdown.push(mdImageLink('a screenshot', repo.owner.login, repo.name, repo.default_branch, 'screenshot.png'))
+
+            const url = (username, reponame, branch, imagename) => `https://github.com/${username}/${reponame}/blob/${branch}/${imagename}?raw=true`
+            const htmlImageLink = (alt, src, width) => `<img alt="${alt}" src="${src}" width="${width}">`
+
+            markdown.push(htmlImageLink('a screenshot', url(repo.owner.login, repo.name, repo.default_branch, 'screenshot.png'), '500px'))
         }
 
-        mdAddInstance(packageDotJson, markdown)
+        markdown.push( ...mdAddInstance(packageDotJson).slice(1))
         /*
                 const deploymentsExample = packageDotJson.deploymentsExample
                 if (deploymentsExample){
                     markdown.push(`deployed example instance [${deploymentsExample}](${deploymentsExample})`)
                 }
         */
+
         if (!reposNoWebBlackList.includes(repo.full_name)) {
 
             //  markdown.push(`[${repo.name}](./pages/${repo.name}/dist/)`)
