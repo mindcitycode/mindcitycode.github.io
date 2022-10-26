@@ -23,6 +23,8 @@ const markdown = [
 ]
 const reposBlackList = [
     'mindcitycode/mindcitycode.github.io',
+    'mindcitycode/mindcitycode',
+    'mindcitycode/guides'
 ]
 const reposNoWebBlackList = [
     'mindcitycode/yaytdlgui',
